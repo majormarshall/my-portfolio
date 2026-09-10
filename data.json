@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "title": "Bello Abdulwadud Ayomide - Software Developer & Entrepreneur",
+    "description": "Software Developer based in Lagos, Nigeria. Building school management systems, web portals, e-commerce and websites.",
+    "keywords": "software developer, Nigeria, web developer, school management system, Lagos, farm e-commerce"
+  },
+  "profile": {
+    "name": "Bello Abdulwadud Ayomide",
+    "image": "assets/img/my-profile-img.jpg",
+    "availabilityBadge": "Available for Hire",
+    "social": {
+      "github": "https://github.com/kalibest10",
+      "twitter": "https://twitter.com/",
+      "linkedin": "https://linkedin.com/",
+      "whatsapp": "https://wa.me/2347058124966"
+    }
+  },
+  "hero": {
+    "backgroundImage": "assets/img/hero-bg.jpg",
+    "badge": "Based in Lagos, Nigeria",
+    "heading": "Bello Abdulwadud Ayomide",
+    "typedItems": ["Software Developer", "School Portal Builder", "Web Application Engineer", "Frontend Developer", "Backend Developer"],
+    "ctaPrimary": { "label": "View My Work", "icon": "bi-grid-3x3-gap", "href": "#portfolio" },
+    "ctaOutline": { "label": "Hire Me", "icon": "bi-envelope", "href": "#contact" }
+  },
+  "about": {
+    "sectionSubtitle": "I'm a passionate Software Developer based in Lagos, Nigeria, with hands-on experience building complete web solutions — from pixel-perfect frontends to robust backend systems. I specialise in school management portals, e-commerce platforms, institutional websites, and foundation platforms that solve real problems for real people.",
+    "heading": "Software Developer & Entrepreneur",
+    "intro": "Building end-to-end digital solutions across Nigeria — from school portals and student management systems to NGO websites, institutional platforms, and entrepreneurial ventures.",
+    "body": "I've successfully delivered multi-portal systems — including student, admin, and staff portals — institutional websites, and NGO platforms. I take pride in shipping production-ready systems that work reliably for schools, foundations, and organisations across Nigeria.",
+    "image": "assets/img/my-profile-img.jpg",
+    "info": {
+      "location": "Lagos, Nigeria",
+      "phone": "+234 705 812 4966 / +234 810 607 1514",
+      "city": "Lagos, Nigeria",
+      "specialisation": "Software Developer",
+      "email": "kalibest10@gmail.com",
+      "freelance": "Available"
+    }
+  },
+  "stats": [
+    { "icon": "bi-emoji-smile", "end": 15, "label": "Happy Clients", "sublabel": "across Nigeria" },
+    { "icon": "bi-journal-richtext", "end": 10, "label": "Projects", "sublabel": "delivered & live" },
+    { "icon": "bi-mortarboard", "end": 4, "label": "School Portals", "sublabel": "built & deployed" },
+    { "icon": "bi-globe", "end": 5, "label": "Live Websites", "sublabel": "running in production" }
+  ],
+  "skills": {
+    "sectionSubtitle": "A full stack skill set — comfortable on both sides of the stack and everything in between.",
+    "bars": [
+      { "name": "HTML & CSS", "value": 95 },
+      { "name": "JavaScript", "value": 85 },
+      { "name": "TypeScript", "value": 80 },
+      { "name": "PHP / Laravel", "value": 85 },
+      { "name": "MySQL / Databases", "value": 80 },
+      { "name": "React / Vue.js", "value": 75 },
+      { "name": "Node.js / Express", "value": 75 },
+      { "name": "Bootstrap / Tailwind", "value": 90 },
+      { "name": "Git / cPanel / Deployment", "value": 80 }
+    ],
+    "badges": [
+      { "icon": "bi-filetype-html", "label": "HTML5" },
+      { "icon": "bi-filetype-css", "label": "CSS3" },
+      { "icon": "bi-filetype-js", "label": "JavaScript" },
+      { "icon": "bi-filetype-tsx", "label": "TypeScript" },
+      { "icon": "bi-filetype-php", "label": "PHP" },
+      { "icon": "bi-database", "label": "MySQL" },
+      { "icon": "bi-layers", "label": "Laravel" },
+      { "icon": "bi-bootstrap", "label": "Bootstrap" },
+      { "icon": "bi-diagram-3", "label": "Node.js" },
+      { "icon": "bi-git", "label": "Git" },
+      { "icon": "bi-cloud-upload", "label": "cPanel Deploy" },
+      { "icon": "bi-phone", "label": "React" },
+      { "icon": "bi-shield-check", "label": "REST APIs" }
+    ]
+  },
+  "resume": {
+    "sectionSubtitle": "My journey as a self-driven software developer, building real-world applications that serve institutions and communities across Nigeria.",
+    "summary": {
+      "name": "Bello Abdulwadud Ayomide",
+      "description": "Results-oriented Software Developer with hands-on experience designing, building, and deploying multi-portal web systems and e-commerce platforms. Proven track record delivering school management platforms, farm e-commerce sites, institutional websites, and NGO portals from concept to production.",
+      "location": "Lagos, Nigeria",
+      "phone": "+234 705 812 4966 / +234 810 607 1514",
+      "email": "kalibest10@gmail.com"
+    },
+    "education": [
+      {
+        "degree": "Biochemistry and Nutrition",
+        "year": "2023",
+        "institution": "Your Institution, Nigeria",
+        "description": "Graduated in Biochemistry and Nutrition in 2023. Complemented academic background with intensive self-driven study in full stack web development, databases, and systems design."
+      }
+    ],
+    "notableProjects": [
+      {
+        "title": "Hamizak Academy — Full System",
+        "subtitle": "School Website + Management Portals",
+        "meta": "hamizak.com.ng & hamizakma.com.ng",
+        "description": "Designed and built the institution's public website alongside a complete school management system featuring separate portals for students, administrators, and staff."
+      },
+      {
+        "title": "Kudirat Oyawoye Foundation",
+        "subtitle": "NGO / Foundation Website",
+        "meta": "kaoyawoyefoundation.com",
+        "description": "Built and deployed the official website for the Kudirat Oyawoye Foundation, providing a clean online presence and information platform for the organisation."
+      }
+    ],
+    "experience": [
+      {
+        "title": "Software Developer & Entrepreneur — Freelance",
+        "period": "2022 – Present",
+        "location": "Lagos, Nigeria",
+        "bullets": [
+          "Architected and deployed multi-portal school management systems (student, admin & staff portals) used live in production",
+          "Built institutional and organisational websites with custom CMS and dynamic content management",
+          "Handled full project lifecycle — from requirements gathering and UI design through to backend development, testing, and server deployment",
+          "Maintained live systems, managing domain configurations, hosting, and database administration"
+        ]
+      },
+      {
+        "title": "Web Developer",
+        "period": "Earlier Experience",
+        "location": "Nigeria",
+        "bullets": [
+          "Developed responsive, mobile-first websites and landing pages for clients",
+          "Built dynamic web applications using PHP, MySQL, HTML, CSS and JavaScript",
+          "Gained deep experience in database design, REST APIs, and user authentication systems",
+          "Collaborated with non-technical clients to translate requirements into polished digital products"
+        ]
+      }
+    ]
+  },
+  "portfolio": [
+    {
+      "id": "p1",
+      "title": "Hamizak Academy",
+      "description": "Official school website — hamizak.com.ng",
+      "image": "assets/img/portfolio/app-1.jpg",
+      "url": "https://www.hamizak.com.ng",
+      "gallery": "portfolio-gallery-school",
+      "filters": ["filter-website", "filter-school"]
+    },
+    {
+      "id": "p2",
+      "title": "Hamizak Student Portal",
+      "description": "Student self-service portal — hamizakma.com.ng",
+      "image": "assets/img/portfolio/app-2.jpg",
+      "url": "https://www.hamizakma.com.ng",
+      "gallery": "portfolio-gallery-school",
+      "filters": ["filter-school"]
+    },
+    {
+      "id": "p3",
+      "title": "Hamizak Admin Portal",
+      "description": "Administrative dashboard — admin.hamizakma.com.ng",
+      "image": "assets/img/portfolio/app-3.jpg",
+      "url": "https://www.admin.hamizakma.com.ng",
+      "gallery": "portfolio-gallery-school",
+      "filters": ["filter-school"]
+    },
+    {
+      "id": "p4",
+      "title": "Hamizak Staff Portal",
+      "description": "Staff management portal — staff.hamizakma.com.ng",
+      "image": "assets/img/portfolio/product-1.jpg",
+      "url": "https://www.staff.hamizakma.com.ng",
+      "gallery": "portfolio-gallery-school",
+      "filters": ["filter-school"]
+    },
+    {
+      "id": "p5",
+      "title": "Kudirat Oyawoye Foundation",
+      "description": "NGO website — kaoyawoyefoundation.com",
+      "image": "assets/img/portfolio/branding-1.jpg",
+      "url": "https://kaoyawoyefoundation.com",
+      "gallery": "portfolio-gallery-foundation",
+      "filters": ["filter-foundation", "filter-website"]
+    },
+    {
+      "id": "p6",
+      "title": "Hamizak — Full Ecosystem",
+      "description": "Website + 3 portals in one complete system",
+      "image": "assets/img/portfolio/product-2.jpg",
+      "url": "https://www.hamizak.com.ng",
+      "gallery": "portfolio-gallery-school",
+      "filters": ["filter-school"]
+    },
+    {
+      "id": "p7",
+      "title": "Pinnacles Resource Centre Farm",
+      "description": "Farm e-commerce platform — farm.pinnaclescentre.ng",
+      "image": "assets/img/portfolio/farm-pinnacles.jpg",
+      "url": "https://farm.pinnaclescentre.ng",
+      "gallery": "portfolio-gallery-farm",
+      "filters": ["filter-farm", "filter-website"]
+    }
+  ],
+  "portfolioFilters": [
+    { "label": "All", "filter": "*" },
+    { "label": "School Portals", "filter": ".filter-school" },
+    { "label": "Websites", "filter": ".filter-website" },
+    { "label": "Foundation", "filter": ".filter-foundation" },
+    { "label": "Farm & E-Commerce", "filter": ".filter-farm" }
+  ],
+  "services": [
+    {
+      "id": "s1",
+      "icon": "bi-globe",
+      "title": "Website Development",
+      "description": "Custom, responsive websites for schools, businesses, NGOs and institutions — built fast and deployed to production.",
+      "delay": 100
+    },
+    {
+      "id": "s2",
+      "icon": "bi-mortarboard",
+      "title": "School Management Systems",
+      "description": "Complete multi-portal school systems — student, admin and staff portals — with role-based access, results management and attendance tracking.",
+      "delay": 200
+    },
+    {
+      "id": "s3",
+      "icon": "bi-server",
+      "title": "Backend & API Development",
+      "description": "Scalable server-side systems, REST APIs, and database design using PHP/Laravel, Node.js and MySQL.",
+      "delay": 300
+    },
+    {
+      "id": "s4",
+      "icon": "bi-phone",
+      "title": "Responsive Frontend Design",
+      "description": "Pixel-perfect, mobile-first frontends using HTML, CSS, JavaScript, Bootstrap and Tailwind CSS.",
+      "delay": 400
+    },
+    {
+      "id": "s5",
+      "icon": "bi-shield-lock",
+      "title": "Auth & Role Management",
+      "description": "Secure login systems, multi-role dashboards and permission-based access control for complex platforms.",
+      "delay": 500
+    },
+    {
+      "id": "s6",
+      "icon": "bi-cloud-upload",
+      "title": "Hosting, Deployment & Maintenance",
+      "description": "Domain setup, cPanel hosting, SSL configuration, and ongoing maintenance to keep your platform running smoothly.",
+      "delay": 600
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "quote": "He built our entire school website and management system from scratch. Students, staff, and admin all have their own portals — and it all works perfectly. We are very impressed with the result.",
+      "image": "assets/img/testimonials/testimonials-1.jpg",
+      "name": "Hamizak Academy",
+      "role": "School Management System — hamizak.com.ng"
+    },
+    {
+      "id": "t2",
+      "quote": "Professional, reliable and technically very strong. He understood what we needed for our foundation website and delivered something clean, modern and easy to manage.",
+      "image": "assets/img/testimonials/testimonials-2.jpg",
+      "name": "Kudirat Oyawoye Foundation",
+      "role": "NGO Website — kaoyawoyefoundation.com"
+    },
+    {
+      "id": "t3",
+      "quote": "Our student portal is now live and pupils can access their results, timetables, and school updates online. It has transformed how we run the school administratively.",
+      "image": "assets/img/testimonials/testimonials-3.jpg",
+      "name": "School Administrator",
+      "role": "Hamizak Student Portal — hamizakma.com.ng"
+    }
+  ],
+  "contact": {
+    "location": "Sam Etana Air Force Base, Ikeja, Lagos, Nigeria",
+    "phone": "+234 705 812 4966 / +234 810 607 1514",
+    "email": "kalibest10@gmail.com",
+    "github": "https://github.com/kalibest10",
+    "formAction": "forms/contact.php",
+    "sectionSubtitle": "Have a project in mind? Let's talk — I'm available for freelance work and open to new opportunities."
+  },
+  "footer": {
+    "copyright": "Bello Abdulwadud Ayomide",
+    "credits": "Software Developer — Lagos, Nigeria",
+    "githubUrl": "https://github.com/kalibest10",
+    "githubLabel": "kalibest10"
+  }
+}

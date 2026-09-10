@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Dashboard - Bello Abdulwadud Ayomide</title>
+  <link rel="stylesheet" href="cms.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="cms-wrapper">
+  <!-- Sidebar -->
+  <aside class="cms-sidebar">
+    <div class="cms-sidebar-header">
+      <span class="cms-logo">⚙ Portfolio CMS</span>
+    </div>
+    <nav class="cms-nav">
+      <div class="cms-nav-item active" data-tab="meta">🌐 Meta / SEO</div>
+      <div class="cms-nav-item" data-tab="profile">👤 Profile</div>
+      <div class="cms-nav-item" data-tab="hero">🦸 Hero</div>
+      <div class="cms-nav-item" data-tab="about">ℹ️ About</div>
+      <div class="cms-nav-item" data-tab="stats">📊 Stats</div>
+      <div class="cms-nav-item" data-tab="skills">💡 Skills</div>
+      <div class="cms-nav-item" data-tab="resume">📄 Resume</div>
+      <div class="cms-nav-item" data-tab="portfolio">🗂 Portfolio</div>
+      <div class="cms-nav-item" data-tab="services">🛠 Services</div>
+      <div class="cms-nav-item" data-tab="testimonials">💬 Testimonials</div>
+      <div class="cms-nav-item" data-tab="contact">📧 Contact</div>
+      <div class="cms-nav-item" data-tab="footer">🔻 Footer</div>
+    </nav>
+    <div class="cms-sidebar-footer">
+      <button class="cms-btn-logout" id="btn-logout">🚪 Logout</button>
+    </div>
+  </aside>
+  
+  <!-- Main content -->
+  <main class="cms-main">
+    <!-- Toolbar -->
+    <div class="cms-toolbar">
+      <button class="mobile-toggle" id="mobile-toggle">☰</button>
+      <h1 class="cms-toolbar-title">Content Editor</h1>
+      <div class="cms-toolbar-actions">
+        <button class="cms-btn cms-btn-secondary" id="btn-load">📂 Load data.json</button>
+        <button class="cms-btn cms-btn-primary" id="btn-save">💾 Save & Download</button>
+      </div>
+    </div>
+    
+    <!-- Tab sections -->
+    <div class="cms-content">
+      
+      <!-- Meta -->
+      <div class="cms-tab-content active" data-tab="meta">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Meta Data (SEO)</h2></div>
+          <div class="cms-form-group">
+            <label>Title</label>
+            <input type="text" id="meta-title" class="cms-input">
+          </div>
+          <div class="cms-form-group">
+            <label>Description</label>
+            <textarea id="meta-description" class="cms-input"></textarea>
+          </div>
+          <div class="cms-form-group">
+            <label>Keywords (comma separated)</label>
+            <input type="text" id="meta-keywords" class="cms-input">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Profile -->
+      <div class="cms-tab-content" data-tab="profile">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Profile</h2></div>
+          <div class="cms-form-row">
+            <div class="cms-form-group">
+              <label>Name</label>
+              <input type="text" id="profile-name" class="cms-input">
+            </div>
+            <div class="cms-form-group">
+              <label>Availability Badge</label>
+              <input type="text" id="profile-availability-badge" class="cms-input">
+            </div>
+          </div>
+          <div class="cms-form-group">
+            <label>Profile Image</label>
+            <div class="cms-drop-zone" id="profile-image-dropzone">
+              <div class="cms-drop-zone-icon">📷</div>
+              <div class="cms-drop-zone-text">Drop image here or click to upload</div>
+              <img class="cms-img-preview" src="">
+              <input type="file" style="display:none" accept="image/*">
+              <input type="hidden" id="profile-image-value">
+              <button class="cms-drop-zone-clear" title="Remove Image">✖</button>
+            </div>
+          </div>
+          
+          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Social Links</h3>
+          <div class="cms-form-row">
+            <div class="cms-form-group">
+              <label>GitHub URL</label>
+              <input type="text" id="social-github" class="cms-input">
+            </div>
+            <div class="cms-form-group">
+              <label>Twitter URL</label>
+              <input type="text" id="social-twitter" class="cms-input">
+            </div>
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group">
+              <label>LinkedIn URL</label>
+              <input type="text" id="social-linkedin" class="cms-input">
+            </div>
+            <div class="cms-form-group">
+              <label>WhatsApp URL</label>
+              <input type="text" id="social-whatsapp" class="cms-input">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Hero -->
+      <div class="cms-tab-content" data-tab="hero">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Hero Section</h2></div>
+          <div class="cms-form-group">
+            <label>Background Image</label>
+            <div class="cms-drop-zone" id="hero-bg-dropzone">
+              <div class="cms-drop-zone-icon">📷</div>
+              <div class="cms-drop-zone-text">Drop image here or click to upload</div>
+              <img class="cms-img-preview" src="">
+              <input type="file" style="display:none" accept="image/*">
+              <input type="hidden" id="hero-bg-value">
+              <button class="cms-drop-zone-clear" title="Remove Image">✖</button>
+            </div>
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group">
+              <label>Badge Text</label>
+              <input type="text" id="hero-badge" class="cms-input">
+            </div>
+            <div class="cms-form-group">
+              <label>Heading</label>
+              <input type="text" id="hero-heading" class="cms-input">
+            </div>
+          </div>
+          <div class="cms-form-group">
+            <label>Typed Items (One per line)</label>
+            <textarea id="hero-typed-items" class="cms-input"></textarea>
+          </div>
+          
+          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Primary CTA</h3>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Label</label><input type="text" id="hero-cta-primary-label" class="cms-input"></div>
+            <div class="cms-form-group"><label>Icon (bi-class)</label><input type="text" id="hero-cta-primary-icon" class="cms-input"></div>
+            <div class="cms-form-group"><label>URL</label><input type="text" id="hero-cta-primary-href" class="cms-input"></div>
+          </div>
+          
+          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Outline CTA</h3>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Label</label><input type="text" id="hero-cta-outline-label" class="cms-input"></div>
+            <div class="cms-form-group"><label>Icon (bi-class)</label><input type="text" id="hero-cta-outline-icon" class="cms-input"></div>
+            <div class="cms-form-group"><label>URL</label><input type="text" id="hero-cta-outline-href" class="cms-input"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- About -->
+      <div class="cms-tab-content" data-tab="about">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">About Section</h2></div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Section Subtitle</label><input type="text" id="about-section-subtitle" class="cms-input"></div>
+            <div class="cms-form-group"><label>Heading</label><input type="text" id="about-heading" class="cms-input"></div>
+          </div>
+          <div class="cms-form-group">
+            <label>Intro</label>
+            <textarea id="about-intro" class="cms-input"></textarea>
+          </div>
+          <div class="cms-form-group">
+            <label>Body Content</label>
+            <textarea id="about-body" class="cms-input" style="min-height:200px;"></textarea>
+          </div>
+          <div class="cms-form-group">
+            <label>About Image</label>
+            <div class="cms-drop-zone" id="about-image-dropzone">
+              <div class="cms-drop-zone-icon">📷</div>
+              <div class="cms-drop-zone-text">Drop image here or click to upload</div>
+              <img class="cms-img-preview" src="">
+              <input type="file" style="display:none" accept="image/*">
+              <input type="hidden" id="about-image-value">
+              <button class="cms-drop-zone-clear" title="Remove Image">✖</button>
+            </div>
+          </div>
+          
+          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">About Info</h3>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Location</label><input type="text" id="about-location" class="cms-input"></div>
+            <div class="cms-form-group"><label>Phone</label><input type="text" id="about-phone" class="cms-input"></div>
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>City</label><input type="text" id="about-city" class="cms-input"></div>
+            <div class="cms-form-group"><label>Specialisation</label><input type="text" id="about-specialisation" class="cms-input"></div>
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Email</label><input type="text" id="about-email" class="cms-input"></div>
+            <div class="cms-form-group"><label>Freelance</label><input type="text" id="about-freelance" class="cms-input"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Stats -->
+      <div class="cms-tab-content" data-tab="stats">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Stats (4 items)</h2></div>
+          
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Stat 1 Icon (bi-class)</label><input type="text" id="stat-0-icon" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 1 End Value</label><input type="number" id="stat-0-end" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 1 Label</label><input type="text" id="stat-0-label" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 1 Sublabel</label><input type="text" id="stat-0-sublabel" class="cms-input"></div>
+          </div>
+          <hr style="border:0; border-top:1px solid var(--border-color); margin:20px 0;">
+          
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Stat 2 Icon (bi-class)</label><input type="text" id="stat-1-icon" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 2 End Value</label><input type="number" id="stat-1-end" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 2 Label</label><input type="text" id="stat-1-label" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 2 Sublabel</label><input type="text" id="stat-1-sublabel" class="cms-input"></div>
+          </div>
+          <hr style="border:0; border-top:1px solid var(--border-color); margin:20px 0;">
+          
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Stat 3 Icon (bi-class)</label><input type="text" id="stat-2-icon" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 3 End Value</label><input type="number" id="stat-2-end" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 3 Label</label><input type="text" id="stat-2-label" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 3 Sublabel</label><input type="text" id="stat-2-sublabel" class="cms-input"></div>
+          </div>
+          <hr style="border:0; border-top:1px solid var(--border-color); margin:20px 0;">
+          
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Stat 4 Icon (bi-class)</label><input type="text" id="stat-3-icon" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 4 End Value</label><input type="number" id="stat-3-end" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 4 Label</label><input type="text" id="stat-3-label" class="cms-input"></div>
+            <div class="cms-form-group"><label>Stat 4 Sublabel</label><input type="text" id="stat-3-sublabel" class="cms-input"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skills -->
+      <div class="cms-tab-content" data-tab="skills">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Skills Section</h2></div>
+          <div class="cms-form-group">
+            <label>Section Subtitle</label>
+            <input type="text" id="skills-section-subtitle" class="cms-input">
+          </div>
+          
+          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Skill Bars</h3>
+          <div id="skills-bars-list" class="cms-list-container"></div>
+          <button id="add-skill-bar" class="cms-btn cms-btn-secondary">➕ Add Skill Bar</button>
+          
+          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Skill Badges</h3>
+          <div id="skills-badges-list" class="cms-list-container"></div>
+          <button id="add-skill-badge" class="cms-btn cms-btn-secondary">➕ Add Skill Badge</button>
+        </div>
+      </div>
+      
+      <!-- Resume -->
+      <div class="cms-tab-content" data-tab="resume">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Resume Section</h2></div>
+          <div class="cms-form-group">
+            <label>Section Subtitle</label>
+            <input type="text" id="resume-section-subtitle" class="cms-input">
+          </div>
+          
+          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Summary</h3>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Name</label><input type="text" id="resume-summary-name" class="cms-input"></div>
+            <div class="cms-form-group"><label>Description</label><textarea id="resume-summary-description" class="cms-input"></textarea></div>
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Location</label><input type="text" id="resume-summary-location" class="cms-input"></div>
+            <div class="cms-form-group"><label>Phone</label><input type="text" id="resume-summary-phone" class="cms-input"></div>
+            <div class="cms-form-group"><label>Email</label><input type="text" id="resume-summary-email" class="cms-input"></div>
+          </div>
+          
+          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Education</h3>
+          <div id="resume-education-list" class="cms-list-container"></div>
+          <button id="add-education" class="cms-btn cms-btn-secondary">➕ Add Education</button>
+          
+          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Notable Projects</h3>
+          <div id="resume-projects-list" class="cms-list-container"></div>
+          <button id="add-notable-project" class="cms-btn cms-btn-secondary">➕ Add Notable Project</button>
+          
+          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Experience</h3>
+          <div id="resume-experience-list" class="cms-list-container"></div>
+          <button id="add-experience" class="cms-btn cms-btn-secondary">➕ Add Experience</button>
+        </div>
+      </div>
+      
+      <!-- Portfolio -->
+      <div class="cms-tab-content" data-tab="portfolio">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Portfolio Filters</h2></div>
+          <div id="portfolio-filters-list" class="cms-list-container"></div>
+          <button id="add-portfolio-filter" class="cms-btn cms-btn-secondary">➕ Add Filter</button>
+        </div>
+        
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Portfolio Items</h2></div>
+          <div id="portfolio-items-list" class="cms-list-container"></div>
+          <button id="add-portfolio-item" class="cms-btn cms-btn-secondary">➕ Add Item</button>
+        </div>
+      </div>
+      
+      <!-- Services -->
+      <div class="cms-tab-content" data-tab="services">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Services</h2></div>
+          <div id="services-list" class="cms-list-container"></div>
+          <button id="add-service" class="cms-btn cms-btn-secondary">➕ Add Service</button>
+        </div>
+      </div>
+      
+      <!-- Testimonials -->
+      <div class="cms-tab-content" data-tab="testimonials">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Testimonials</h2></div>
+          <div id="testimonials-list" class="cms-list-container"></div>
+          <button id="add-testimonial" class="cms-btn cms-btn-secondary">➕ Add Testimonial</button>
+        </div>
+      </div>
+      
+      <!-- Contact -->
+      <div class="cms-tab-content" data-tab="contact">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Contact</h2></div>
+          <div class="cms-form-group">
+            <label>Section Subtitle</label>
+            <input type="text" id="contact-subtitle" class="cms-input">
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Location</label><input type="text" id="contact-location" class="cms-input"></div>
+            <div class="cms-form-group"><label>Phone</label><input type="text" id="contact-phone" class="cms-input"></div>
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Email</label><input type="text" id="contact-email" class="cms-input"></div>
+            <div class="cms-form-group"><label>GitHub Handle</label><input type="text" id="contact-github" class="cms-input"></div>
+          </div>
+          <div class="cms-form-group">
+            <label>Form Action URL (e.g. Formspree)</label>
+            <input type="text" id="contact-form-action" class="cms-input">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="cms-tab-content" data-tab="footer">
+        <div class="cms-card">
+          <div class="cms-card-header"><h2 class="cms-card-title">Footer</h2></div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>Copyright</label><input type="text" id="footer-copyright" class="cms-input"></div>
+            <div class="cms-form-group"><label>Credits HTML</label><input type="text" id="footer-credits" class="cms-input"></div>
+          </div>
+          <div class="cms-form-row">
+            <div class="cms-form-group"><label>GitHub URL</label><input type="text" id="footer-github-url" class="cms-input"></div>
+            <div class="cms-form-group"><label>GitHub Label</label><input type="text" id="footer-github-label" class="cms-input"></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+  
+  <!-- Toast -->
+  <div class="cms-toast" id="cms-toast"></div>
+  
+  <!-- Hidden file input for data.json loading -->
+  <input type="file" id="file-loader" accept=".json" style="display:none">
+  
+  <script src="config.js"></script>
+  <script src="cms.js"></script>
+</body>
+</html>
