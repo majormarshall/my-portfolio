@@ -2,7 +2,7 @@
 
 > **Full Stack Developer & Entrepreneur** | Lagos, Nigeria
 
-[![Live Portfolio](https://img.shields.io/badge/Live%20Portfolio-Visit-brightgreen?style=for-the-badge&logo=google-chrome)](https://kalibest10.github.io/my-portfolio)
+[![Live Portfolio](https://img.shields.io/badge/Live%20Portfolio-Visit-brightgreen?style=for-the-badge&logo=google-chrome)](https://belloabdulwadud.com.ng)
 [![GitHub](https://img.shields.io/badge/GitHub-kalibest10-black?style=for-the-badge&logo=github)](https://github.com/kalibest10)
 [![Email](https://img.shields.io/badge/Email-kalibest10%40gmail.com-red?style=for-the-badge&logo=gmail)](mailto:kalibest10@gmail.com)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-%2B234%20705%20812%204966-25D366?style=for-the-badge&logo=whatsapp)](https://wa.me/2347058124966)

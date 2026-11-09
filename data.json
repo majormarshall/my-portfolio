@@ -281,5 +281,25 @@
     "credits": "Software Developer — Lagos, Nigeria",
     "githubUrl": "https://github.com/kalibest10",
     "githubLabel": "kalibest10"
-  }
+  },
+  "blog": [
+    {
+      "id": "b1",
+      "title": "How I Built a Full School Management System",
+      "slug": "school-management-system",
+      "date": "2024-01-15",
+      "category": "Web Development",
+      "excerpt": "A behind-the-scenes look at how I architected and deployed a multi-portal school management system serving students, staff, and administrators.",
+      "status": "published"
+    },
+    {
+      "id": "b2",
+      "title": "Laravel vs Node.js — My Experience",
+      "slug": "laravel-vs-nodejs",
+      "date": "2024-02-10",
+      "category": "Backend",
+      "excerpt": "After building production systems with both, here's my honest comparison of Laravel and Node.js for Nigerian web projects.",
+      "status": "draft"
+    }
+  ]
 }

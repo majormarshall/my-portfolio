@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reset Admin Session</title>
+  <style>
+    body { font-family: sans-serif; background: #0a0f1e; color: #fff; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; flex-direction: column; gap: 16px; }
+    button { padding: 14px 32px; background: #0ea5e9; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+    button:hover { background: #0284c7; }
+    .msg { color: #10b981; font-weight: bold; display: none; }
+  </style>
+</head>
+<body>
+  <h2>🔄 Admin Session Reset</h2>
+  <p>Click below to clear all lockouts and login state, then log in fresh.</p>
+  <button onclick="resetAll()">Clear Lockout &amp; Reset</button>
+  <div class="msg" id="msg">✓ Done! Redirecting to login…</div>
+  <script src="config.js"></script>
+  <script>
+    function resetAll() {
+      localStorage.removeItem(CMS_CONFIG.SESSION_KEY);
+      localStorage.removeItem(CMS_CONFIG.ATTEMPTS_KEY);
+      localStorage.removeItem(CMS_CONFIG.LOCKOUT_KEY);
+      localStorage.removeItem(CMS_CONFIG.PWD_KEY);
+      document.getElementById('msg').style.display = 'block';
+      setTimeout(() => window.location.href = 'index.html', 1500);
+    }
+  </script>
+</body>
+</html>

@@ -1,382 +1,726 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CMS Dashboard - Bello Abdulwadud Ayomide</title>
+  <title>Admin Dashboard — Bello Abdulwadud Ayomide</title>
+  <meta name="description" content="Admin dashboard for managing portfolio content">
   <link rel="stylesheet" href="cms.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="cms-wrapper">
-  <!-- Sidebar -->
-  <aside class="cms-sidebar">
-    <div class="cms-sidebar-header">
-      <span class="cms-logo">⚙ Portfolio CMS</span>
+<body class="app">
+
+  <!-- ═══════════════ NOTIFICATION PANEL ═══════════════ -->
+  <div class="notif-overlay" id="notif-overlay"></div>
+  <aside class="notif-panel" id="notif-panel">
+    <div class="notif-head">
+      <span class="notif-title">🔔 Activity Log</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-ghost btn-sm" id="clear-notifs">Clear all</button>
+        <button class="btn btn-ghost btn-sm btn-icon" id="close-notif">✕</button>
+      </div>
     </div>
-    <nav class="cms-nav">
-      <div class="cms-nav-item active" data-tab="meta">🌐 Meta / SEO</div>
-      <div class="cms-nav-item" data-tab="profile">👤 Profile</div>
-      <div class="cms-nav-item" data-tab="hero">🦸 Hero</div>
-      <div class="cms-nav-item" data-tab="about">ℹ️ About</div>
-      <div class="cms-nav-item" data-tab="stats">📊 Stats</div>
-      <div class="cms-nav-item" data-tab="skills">💡 Skills</div>
-      <div class="cms-nav-item" data-tab="resume">📄 Resume</div>
-      <div class="cms-nav-item" data-tab="portfolio">🗂 Portfolio</div>
-      <div class="cms-nav-item" data-tab="services">🛠 Services</div>
-      <div class="cms-nav-item" data-tab="testimonials">💬 Testimonials</div>
-      <div class="cms-nav-item" data-tab="contact">📧 Contact</div>
-      <div class="cms-nav-item" data-tab="footer">🔻 Footer</div>
-    </nav>
-    <div class="cms-sidebar-footer">
-      <button class="cms-btn-logout" id="btn-logout">🚪 Logout</button>
+    <div class="notif-list" id="notif-list">
+      <div class="notif-empty">No activity yet. Start editing!</div>
     </div>
   </aside>
-  
-  <!-- Main content -->
-  <main class="cms-main">
-    <!-- Toolbar -->
-    <div class="cms-toolbar">
-      <button class="mobile-toggle" id="mobile-toggle">☰</button>
-      <h1 class="cms-toolbar-title">Content Editor</h1>
-      <div class="cms-toolbar-actions">
-        <button class="cms-btn cms-btn-secondary" id="btn-load">📂 Load data.json</button>
-        <button class="cms-btn cms-btn-primary" id="btn-save">💾 Save & Download</button>
+
+  <!-- ═══════════════ SIDEBAR ═══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-icon">✦</div>
+      <div>
+        <div class="sidebar-logo-text">Bello Abdulwadud</div>
+        <div class="sidebar-logo-sub">Admin Dashboard</div>
       </div>
     </div>
-    
-    <!-- Tab sections -->
-    <div class="cms-content">
-      
-      <!-- Meta -->
-      <div class="cms-tab-content active" data-tab="meta">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Meta Data (SEO)</h2></div>
-          <div class="cms-form-group">
-            <label>Title</label>
-            <input type="text" id="meta-title" class="cms-input">
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Dashboard</div>
+      <div class="nav-item active" data-tab="overview"><span class="nav-icon">🏠</span> Overview</div>
+      <div class="nav-item" data-tab="analytics"><span class="nav-icon">📊</span> Analytics</div>
+      <div class="nav-item" data-tab="media"><span class="nav-icon">🖼</span> Media Library</div>
+      <div class="nav-item" data-tab="blog"><span class="nav-icon">📝</span> Blog Posts</div>
+
+      <div class="nav-label">Site Content</div>
+      <div class="nav-item" data-tab="meta"><span class="nav-icon">🌐</span> Meta / SEO</div>
+      <div class="nav-item" data-tab="profile"><span class="nav-icon">👤</span> Profile</div>
+      <div class="nav-item" data-tab="hero"><span class="nav-icon">⚡</span> Hero</div>
+      <div class="nav-item" data-tab="about"><span class="nav-icon">ℹ</span> About</div>
+
+      <div class="nav-label">Sections</div>
+      <div class="nav-item" data-tab="stats"><span class="nav-icon">📈</span> Stats</div>
+      <div class="nav-item" data-tab="skills"><span class="nav-icon">💡</span> Skills</div>
+      <div class="nav-item" data-tab="resume"><span class="nav-icon">📄</span> Resume</div>
+      <div class="nav-item" data-tab="portfolio"><span class="nav-icon">🗂</span> Portfolio</div>
+      <div class="nav-item" data-tab="services"><span class="nav-icon">🛠</span> Services</div>
+      <div class="nav-item" data-tab="testimonials"><span class="nav-icon">💬</span> Testimonials</div>
+      <div class="nav-item" data-tab="contact"><span class="nav-icon">📧</span> Contact</div>
+      <div class="nav-item" data-tab="footer"><span class="nav-icon">▾</span> Footer</div>
+
+      <div class="nav-label">System</div>
+      <div class="nav-item" data-tab="settings"><span class="nav-icon">⚙️</span> Settings</div>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="btn-logout" id="btn-logout">🚪 Sign out</button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ MAIN ═══════════════ -->
+  <div class="main-area">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <div class="topbar-breadcrumb">
+          <span class="topbar-site">My Portfolio</span>
+          <span class="topbar-sep">/</span>
+          <span class="topbar-title" id="topbar-title">Overview</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-ghost btn-sm topbar-search-btn" id="topbar-search-btn" title="Search sections (Ctrl+K)">
+          🔍 <span class="search-hint">Ctrl+K</span>
+        </button>
+        <button class="btn btn-ghost btn-sm" id="btn-load">📂 Load JSON</button>
+        <button class="btn btn-primary btn-sm" id="btn-save">💾 Save & Download</button>
+        <a class="btn btn-ghost btn-sm btn-icon" href="../index.html" target="_blank" title="Preview site">👁</a>
+        <button class="topbar-icon-btn" id="notif-btn" title="Notifications">
+          🔔
+          <span class="notif-badge" id="notif-badge" style="display:none">0</span>
+        </button>
+        <button class="topbar-icon-btn" id="theme-toggle" title="Toggle dark/light mode">🌙</button>
+        <div class="topbar-avatar" id="topbar-avatar" title="Profile">BA</div>
+      </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+      <div class="search-box">
+        <input type="text" class="search-input" id="search-input" placeholder="Search sections… (e.g. 'Portfolio', 'Hero')">
+        <div class="search-results" id="search-results"></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content-area">
+
+      <!-- ══════════════════════════════════════════
+           OVERVIEW TAB
+      ══════════════════════════════════════════ -->
+      <div class="section active" data-tab="overview">
+        <div class="section-head">
+          <h2>Welcome back, Bello 👋</h2>
+          <p id="overview-last-saved">Your portfolio admin dashboard — manage everything from one place.</p>
+        </div>
+
+        <!-- Quick Stats Row -->
+        <div class="ov-stats-grid">
+          <div class="ov-stat-card" data-nav="portfolio">
+            <div class="ov-stat-icon" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">🗂</div>
+            <div class="ov-stat-info">
+              <div class="ov-stat-num" id="ov-projects">0</div>
+              <div class="ov-stat-label">Projects</div>
+            </div>
+            <div class="ov-stat-arrow">→</div>
           </div>
-          <div class="cms-form-group">
-            <label>Description</label>
-            <textarea id="meta-description" class="cms-input"></textarea>
+          <div class="ov-stat-card" data-nav="skills">
+            <div class="ov-stat-icon" style="background:linear-gradient(135deg,#10b981,#059669)">💡</div>
+            <div class="ov-stat-info">
+              <div class="ov-stat-num" id="ov-skills">0</div>
+              <div class="ov-stat-label">Skills</div>
+            </div>
+            <div class="ov-stat-arrow">→</div>
           </div>
-          <div class="cms-form-group">
-            <label>Keywords (comma separated)</label>
-            <input type="text" id="meta-keywords" class="cms-input">
+          <div class="ov-stat-card" data-nav="testimonials">
+            <div class="ov-stat-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">💬</div>
+            <div class="ov-stat-info">
+              <div class="ov-stat-num" id="ov-testimonials">0</div>
+              <div class="ov-stat-label">Testimonials</div>
+            </div>
+            <div class="ov-stat-arrow">→</div>
+          </div>
+          <div class="ov-stat-card" data-nav="services">
+            <div class="ov-stat-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">🛠</div>
+            <div class="ov-stat-info">
+              <div class="ov-stat-num" id="ov-services">0</div>
+              <div class="ov-stat-label">Services</div>
+            </div>
+            <div class="ov-stat-arrow">→</div>
+          </div>
+          <div class="ov-stat-card" data-nav="blog">
+            <div class="ov-stat-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626)">📝</div>
+            <div class="ov-stat-info">
+              <div class="ov-stat-num" id="ov-blog">0</div>
+              <div class="ov-stat-label">Blog Posts</div>
+            </div>
+            <div class="ov-stat-arrow">→</div>
+          </div>
+          <div class="ov-stat-card" data-nav="resume">
+            <div class="ov-stat-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">📄</div>
+            <div class="ov-stat-info">
+              <div class="ov-stat-num" id="ov-experience">0</div>
+              <div class="ov-stat-label">Experience</div>
+            </div>
+            <div class="ov-stat-arrow">→</div>
+          </div>
+        </div>
+
+        <!-- Two-column lower section -->
+        <div class="ov-lower">
+          <!-- Project Thumbnails -->
+          <div class="card ov-projects-card">
+            <div class="card-head">
+              <span class="card-title">Recent Projects</span>
+              <button class="btn btn-ghost btn-sm" data-nav="portfolio">View all →</button>
+            </div>
+            <div class="ov-project-grid" id="ov-project-grid">
+              <div class="ov-empty">Load your data.json to see projects</div>
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div class="ov-right-col">
+            <!-- Skills Summary -->
+            <div class="card ov-skills-card">
+              <div class="card-head">
+                <span class="card-title">Top Skills</span>
+                <button class="btn btn-ghost btn-sm" data-nav="skills">Edit →</button>
+              </div>
+              <div id="ov-skills-list"></div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="card">
+              <div class="card-head"><span class="card-title">Quick Actions</span></div>
+              <div class="quick-actions">
+                <button class="quick-action" data-nav="meta">🌐 Edit SEO</button>
+                <button class="quick-action" data-nav="hero">⚡ Edit Hero</button>
+                <button class="quick-action" data-nav="portfolio">🗂 Add Project</button>
+                <button class="quick-action" data-nav="blog">📝 New Blog Post</button>
+                <button class="quick-action" data-nav="testimonials">💬 Add Testimonial</button>
+                <button class="quick-action" data-nav="settings">⚙️ Settings</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <!-- Profile -->
-      <div class="cms-tab-content" data-tab="profile">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Profile</h2></div>
-          <div class="cms-form-row">
-            <div class="cms-form-group">
-              <label>Name</label>
-              <input type="text" id="profile-name" class="cms-input">
+
+      <!-- ══════════════════════════════════════════
+           ANALYTICS TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="analytics">
+        <div class="section-head">
+          <h2>Analytics</h2>
+          <p>Visual breakdown of your portfolio data.</p>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="card analytics-card">
+            <div class="card-head"><span class="card-title">Skills Breakdown</span></div>
+            <canvas id="chart-skills" height="260"></canvas>
+          </div>
+          <div class="card analytics-card">
+            <div class="card-head"><span class="card-title">Projects by Category</span></div>
+            <canvas id="chart-projects" height="260"></canvas>
+          </div>
+          <div class="card analytics-card">
+            <div class="card-head"><span class="card-title">Blog Post Status</span></div>
+            <canvas id="chart-blog" height="260"></canvas>
+          </div>
+          <div class="card analytics-card">
+            <div class="card-head"><span class="card-title">Portfolio Stats Counters</span></div>
+            <div class="stat-rings" id="stat-rings"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           MEDIA LIBRARY TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="media">
+        <div class="section-head">
+          <h2>Media Library</h2>
+          <p>All images used in your portfolio — click to view or replace.</p>
+        </div>
+        <div class="card">
+          <div class="media-grid" id="media-grid">
+            <div class="ov-empty" style="grid-column:1/-1">Load your data.json to see media</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           BLOG POSTS TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="blog">
+        <div class="section-head">
+          <h2>Blog Posts</h2>
+          <p>Manage your blog post drafts and published articles.</p>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">All Posts</span>
+            <button class="btn btn-primary btn-sm" id="add-blog-post">+ New Post</button>
+          </div>
+          <div id="blog-list" class="list-wrap"></div>
+          <div class="blog-empty" id="blog-empty" style="display:none">
+            <div style="text-align:center;padding:32px;color:var(--muted-2)">No blog posts yet. Click "+ New Post" to create one.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           META TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="meta">
+        <div class="section-head">
+          <h2>Meta / SEO</h2>
+          <p>Controls the page title, description, and search engine keywords.</p>
+        </div>
+        <div class="card">
+          <div class="field">
+            <label>Page Title</label>
+            <input type="text" id="meta-title">
+          </div>
+          <div class="field">
+            <label>Meta Description</label>
+            <textarea id="meta-description" style="min-height:80px"></textarea>
+          </div>
+          <div class="field">
+            <label>Keywords (comma-separated)</label>
+            <input type="text" id="meta-keywords">
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           PROFILE TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="profile">
+        <div class="section-head">
+          <h2>Profile</h2>
+          <p>Your name, photo, availability status and social links shown in the sidebar.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Identity</span></div>
+          <div class="row">
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text" id="profile-name">
             </div>
-            <div class="cms-form-group">
+            <div class="field">
               <label>Availability Badge</label>
-              <input type="text" id="profile-availability-badge" class="cms-input">
+              <input type="text" id="profile-availability-badge" placeholder="Available for Hire">
             </div>
           </div>
-          <div class="cms-form-group">
-            <label>Profile Image</label>
-            <div class="cms-drop-zone" id="profile-image-dropzone">
-              <div class="cms-drop-zone-icon">📷</div>
-              <div class="cms-drop-zone-text">Drop image here or click to upload</div>
-              <img class="cms-img-preview" src="">
+          <div class="field">
+            <label>Profile Photo</label>
+            <div class="drop-zone" id="profile-image-dropzone">
+              <div class="drop-icon">📷</div>
+              <div class="drop-text">Drop image here or <span>click to browse</span></div>
+              <div class="drop-hint">PNG, JPG, WEBP — stored as base64</div>
+              <img class="drop-preview" src="" alt="">
               <input type="file" style="display:none" accept="image/*">
               <input type="hidden" id="profile-image-value">
-              <button class="cms-drop-zone-clear" title="Remove Image">✖</button>
-            </div>
-          </div>
-          
-          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Social Links</h3>
-          <div class="cms-form-row">
-            <div class="cms-form-group">
-              <label>GitHub URL</label>
-              <input type="text" id="social-github" class="cms-input">
-            </div>
-            <div class="cms-form-group">
-              <label>Twitter URL</label>
-              <input type="text" id="social-twitter" class="cms-input">
-            </div>
-          </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group">
-              <label>LinkedIn URL</label>
-              <input type="text" id="social-linkedin" class="cms-input">
-            </div>
-            <div class="cms-form-group">
-              <label>WhatsApp URL</label>
-              <input type="text" id="social-whatsapp" class="cms-input">
+              <button class="drop-clear" title="Remove">✕</button>
             </div>
           </div>
         </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Social Links</span></div>
+          <div class="row">
+            <div class="field"><label>GitHub URL</label><input type="text" id="social-github"></div>
+            <div class="field"><label>Twitter / X URL</label><input type="text" id="social-twitter"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label>LinkedIn URL</label><input type="text" id="social-linkedin"></div>
+            <div class="field"><label>WhatsApp URL</label><input type="text" id="social-whatsapp"></div>
+          </div>
+        </div>
       </div>
-      
-      <!-- Hero -->
-      <div class="cms-tab-content" data-tab="hero">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Hero Section</h2></div>
-          <div class="cms-form-group">
+
+      <!-- ══════════════════════════════════════════
+           HERO TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="hero">
+        <div class="section-head">
+          <h2>Hero</h2>
+          <p>The full-screen opening section with your name and typed text.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Background & Text</span></div>
+          <div class="field">
             <label>Background Image</label>
-            <div class="cms-drop-zone" id="hero-bg-dropzone">
-              <div class="cms-drop-zone-icon">📷</div>
-              <div class="cms-drop-zone-text">Drop image here or click to upload</div>
-              <img class="cms-img-preview" src="">
+            <div class="drop-zone" id="hero-bg-dropzone">
+              <div class="drop-icon">🖼</div>
+              <div class="drop-text">Drop image here or <span>click to browse</span></div>
+              <div class="drop-hint">Recommended: wide landscape image</div>
+              <img class="drop-preview" src="" alt="">
               <input type="file" style="display:none" accept="image/*">
               <input type="hidden" id="hero-bg-value">
-              <button class="cms-drop-zone-clear" title="Remove Image">✖</button>
+              <button class="drop-clear" title="Remove">✕</button>
             </div>
           </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group">
-              <label>Badge Text</label>
-              <input type="text" id="hero-badge" class="cms-input">
-            </div>
-            <div class="cms-form-group">
-              <label>Heading</label>
-              <input type="text" id="hero-heading" class="cms-input">
-            </div>
+          <div class="row">
+            <div class="field"><label>Badge Text</label><input type="text" id="hero-badge" placeholder="Based in Lagos, Nigeria"></div>
+            <div class="field"><label>Main Heading</label><input type="text" id="hero-heading"></div>
           </div>
-          <div class="cms-form-group">
-            <label>Typed Items (One per line)</label>
-            <textarea id="hero-typed-items" class="cms-input"></textarea>
+          <div class="field">
+            <label>Typed Items</label>
+            <textarea id="hero-typed-items" style="min-height:110px" placeholder="One item per line&#10;Software Developer&#10;School Portal Builder"></textarea>
+            <div style="font-size:11px;color:var(--muted-2);margin-top:5px">One item per line — they will cycle in the hero animation</div>
           </div>
-          
-          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Primary CTA</h3>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Label</label><input type="text" id="hero-cta-primary-label" class="cms-input"></div>
-            <div class="cms-form-group"><label>Icon (bi-class)</label><input type="text" id="hero-cta-primary-icon" class="cms-input"></div>
-            <div class="cms-form-group"><label>URL</label><input type="text" id="hero-cta-primary-href" class="cms-input"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Call-to-Action Buttons</span></div>
+          <div style="margin-bottom:14px;font-size:12px;color:var(--muted-2);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Primary Button</div>
+          <div class="row">
+            <div class="field"><label>Label</label><input type="text" id="hero-cta-primary-label"></div>
+            <div class="field"><label>Icon (bootstrap class)</label><input type="text" id="hero-cta-primary-icon" placeholder="bi-grid-3x3-gap"></div>
+            <div class="field"><label>URL</label><input type="text" id="hero-cta-primary-href" placeholder="#portfolio"></div>
           </div>
-          
-          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Outline CTA</h3>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Label</label><input type="text" id="hero-cta-outline-label" class="cms-input"></div>
-            <div class="cms-form-group"><label>Icon (bi-class)</label><input type="text" id="hero-cta-outline-icon" class="cms-input"></div>
-            <div class="cms-form-group"><label>URL</label><input type="text" id="hero-cta-outline-href" class="cms-input"></div>
+          <hr class="divider">
+          <div style="margin-bottom:14px;font-size:12px;color:var(--muted-2);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Outline Button</div>
+          <div class="row">
+            <div class="field"><label>Label</label><input type="text" id="hero-cta-outline-label"></div>
+            <div class="field"><label>Icon (bootstrap class)</label><input type="text" id="hero-cta-outline-icon" placeholder="bi-envelope"></div>
+            <div class="field"><label>URL</label><input type="text" id="hero-cta-outline-href" placeholder="#contact"></div>
           </div>
         </div>
       </div>
-      
-      <!-- About -->
-      <div class="cms-tab-content" data-tab="about">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">About Section</h2></div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Section Subtitle</label><input type="text" id="about-section-subtitle" class="cms-input"></div>
-            <div class="cms-form-group"><label>Heading</label><input type="text" id="about-heading" class="cms-input"></div>
+
+      <!-- ══════════════════════════════════════════
+           ABOUT TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="about">
+        <div class="section-head">
+          <h2>About</h2>
+          <p>Your bio, profile photo, and personal info table.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Text Content</span></div>
+          <div class="row">
+            <div class="field"><label>Section Subtitle</label><input type="text" id="about-section-subtitle"></div>
+            <div class="field"><label>Heading</label><input type="text" id="about-heading"></div>
           </div>
-          <div class="cms-form-group">
-            <label>Intro</label>
-            <textarea id="about-intro" class="cms-input"></textarea>
-          </div>
-          <div class="cms-form-group">
-            <label>Body Content</label>
-            <textarea id="about-body" class="cms-input" style="min-height:200px;"></textarea>
-          </div>
-          <div class="cms-form-group">
-            <label>About Image</label>
-            <div class="cms-drop-zone" id="about-image-dropzone">
-              <div class="cms-drop-zone-icon">📷</div>
-              <div class="cms-drop-zone-text">Drop image here or click to upload</div>
-              <img class="cms-img-preview" src="">
+          <div class="field"><label>Intro Paragraph</label><textarea id="about-intro"></textarea></div>
+          <div class="field"><label>Body Paragraph</label><textarea id="about-body" style="min-height:130px"></textarea></div>
+          <div class="field">
+            <label>Photo</label>
+            <div class="drop-zone" id="about-image-dropzone">
+              <div class="drop-icon">📷</div>
+              <div class="drop-text">Drop image here or <span>click to browse</span></div>
+              <div class="drop-hint">Square or portrait recommended</div>
+              <img class="drop-preview" src="" alt="">
               <input type="file" style="display:none" accept="image/*">
               <input type="hidden" id="about-image-value">
-              <button class="cms-drop-zone-clear" title="Remove Image">✖</button>
+              <button class="drop-clear" title="Remove">✕</button>
             </div>
           </div>
-          
-          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">About Info</h3>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Location</label><input type="text" id="about-location" class="cms-input"></div>
-            <div class="cms-form-group"><label>Phone</label><input type="text" id="about-phone" class="cms-input"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Info Table</span></div>
+          <div class="row">
+            <div class="field"><label>Location</label><input type="text" id="about-location"></div>
+            <div class="field"><label>Phone</label><input type="text" id="about-phone"></div>
           </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>City</label><input type="text" id="about-city" class="cms-input"></div>
-            <div class="cms-form-group"><label>Specialisation</label><input type="text" id="about-specialisation" class="cms-input"></div>
+          <div class="row">
+            <div class="field"><label>City</label><input type="text" id="about-city"></div>
+            <div class="field"><label>Specialisation</label><input type="text" id="about-specialisation"></div>
           </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Email</label><input type="text" id="about-email" class="cms-input"></div>
-            <div class="cms-form-group"><label>Freelance</label><input type="text" id="about-freelance" class="cms-input"></div>
+          <div class="row">
+            <div class="field"><label>Email</label><input type="text" id="about-email"></div>
+            <div class="field"><label>Freelance</label><input type="text" id="about-freelance" placeholder="Available"></div>
           </div>
         </div>
       </div>
-      
-      <!-- Stats -->
-      <div class="cms-tab-content" data-tab="stats">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Stats (4 items)</h2></div>
-          
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Stat 1 Icon (bi-class)</label><input type="text" id="stat-0-icon" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 1 End Value</label><input type="number" id="stat-0-end" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 1 Label</label><input type="text" id="stat-0-label" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 1 Sublabel</label><input type="text" id="stat-0-sublabel" class="cms-input"></div>
+
+      <!-- ══════════════════════════════════════════
+           STATS TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="stats">
+        <div class="section-head">
+          <h2>Stats</h2>
+          <p>The four animated counter cards below the About section.</p>
+        </div>
+        <div class="card stats-grid">
+          <div style="background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:18px">
+            <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em">Stat 1</div>
+            <div class="field"><label>Icon class</label><input type="text" id="stat-0-icon" placeholder="bi-emoji-smile"></div>
+            <div class="row">
+              <div class="field"><label>End Value</label><input type="number" id="stat-0-end"></div>
+              <div class="field"><label>Label</label><input type="text" id="stat-0-label"></div>
+            </div>
+            <div class="field"><label>Sublabel</label><input type="text" id="stat-0-sublabel"></div>
           </div>
-          <hr style="border:0; border-top:1px solid var(--border-color); margin:20px 0;">
-          
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Stat 2 Icon (bi-class)</label><input type="text" id="stat-1-icon" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 2 End Value</label><input type="number" id="stat-1-end" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 2 Label</label><input type="text" id="stat-1-label" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 2 Sublabel</label><input type="text" id="stat-1-sublabel" class="cms-input"></div>
+          <div style="background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:18px">
+            <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em">Stat 2</div>
+            <div class="field"><label>Icon class</label><input type="text" id="stat-1-icon"></div>
+            <div class="row">
+              <div class="field"><label>End Value</label><input type="number" id="stat-1-end"></div>
+              <div class="field"><label>Label</label><input type="text" id="stat-1-label"></div>
+            </div>
+            <div class="field"><label>Sublabel</label><input type="text" id="stat-1-sublabel"></div>
           </div>
-          <hr style="border:0; border-top:1px solid var(--border-color); margin:20px 0;">
-          
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Stat 3 Icon (bi-class)</label><input type="text" id="stat-2-icon" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 3 End Value</label><input type="number" id="stat-2-end" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 3 Label</label><input type="text" id="stat-2-label" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 3 Sublabel</label><input type="text" id="stat-2-sublabel" class="cms-input"></div>
+          <div style="background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:18px">
+            <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em">Stat 3</div>
+            <div class="field"><label>Icon class</label><input type="text" id="stat-2-icon"></div>
+            <div class="row">
+              <div class="field"><label>End Value</label><input type="number" id="stat-2-end"></div>
+              <div class="field"><label>Label</label><input type="text" id="stat-2-label"></div>
+            </div>
+            <div class="field"><label>Sublabel</label><input type="text" id="stat-2-sublabel"></div>
           </div>
-          <hr style="border:0; border-top:1px solid var(--border-color); margin:20px 0;">
-          
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Stat 4 Icon (bi-class)</label><input type="text" id="stat-3-icon" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 4 End Value</label><input type="number" id="stat-3-end" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 4 Label</label><input type="text" id="stat-3-label" class="cms-input"></div>
-            <div class="cms-form-group"><label>Stat 4 Sublabel</label><input type="text" id="stat-3-sublabel" class="cms-input"></div>
+          <div style="background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:18px">
+            <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em">Stat 4</div>
+            <div class="field"><label>Icon class</label><input type="text" id="stat-3-icon"></div>
+            <div class="row">
+              <div class="field"><label>End Value</label><input type="number" id="stat-3-end"></div>
+              <div class="field"><label>Label</label><input type="text" id="stat-3-label"></div>
+            </div>
+            <div class="field"><label>Sublabel</label><input type="text" id="stat-3-sublabel"></div>
           </div>
         </div>
       </div>
-      
-      <!-- Skills -->
-      <div class="cms-tab-content" data-tab="skills">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Skills Section</h2></div>
-          <div class="cms-form-group">
-            <label>Section Subtitle</label>
-            <input type="text" id="skills-section-subtitle" class="cms-input">
-          </div>
-          
-          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Skill Bars</h3>
-          <div id="skills-bars-list" class="cms-list-container"></div>
-          <button id="add-skill-bar" class="cms-btn cms-btn-secondary">➕ Add Skill Bar</button>
-          
-          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Skill Badges</h3>
-          <div id="skills-badges-list" class="cms-list-container"></div>
-          <button id="add-skill-badge" class="cms-btn cms-btn-secondary">➕ Add Skill Badge</button>
+
+      <!-- ══════════════════════════════════════════
+           SKILLS TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="skills">
+        <div class="section-head">
+          <h2>Skills</h2>
+          <p>Progress bars and technology badge pills.</p>
+        </div>
+        <div class="card">
+          <div class="field"><label>Section Subtitle</label><input type="text" id="skills-section-subtitle"></div>
+          <div class="card-head" style="margin-top:8px"><span class="card-title">Skill Bars</span></div>
+          <div id="skills-bars-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-skill-bar">+ Add Skill Bar</button>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Tech Badges</span></div>
+          <div id="skills-badges-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-skill-badge">+ Add Badge</button>
         </div>
       </div>
-      
-      <!-- Resume -->
-      <div class="cms-tab-content" data-tab="resume">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Resume Section</h2></div>
-          <div class="cms-form-group">
-            <label>Section Subtitle</label>
-            <input type="text" id="resume-section-subtitle" class="cms-input">
+
+      <!-- ══════════════════════════════════════════
+           RESUME TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="resume">
+        <div class="section-head">
+          <h2>Resume</h2>
+          <p>Summary, education, notable projects, and work experience.</p>
+        </div>
+        <div class="card">
+          <div class="field"><label>Section Subtitle</label><input type="text" id="resume-section-subtitle"></div>
+          <div class="card-head" style="margin-top:8px"><span class="card-title">Summary</span></div>
+          <div class="row">
+            <div class="field"><label>Name</label><input type="text" id="resume-summary-name"></div>
+            <div class="field"><label>Description</label><textarea id="resume-summary-description"></textarea></div>
           </div>
-          
-          <h3 style="margin: 20px 0 10px; font-size: 14px; color: var(--text-muted)">Summary</h3>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Name</label><input type="text" id="resume-summary-name" class="cms-input"></div>
-            <div class="cms-form-group"><label>Description</label><textarea id="resume-summary-description" class="cms-input"></textarea></div>
+          <div class="row">
+            <div class="field"><label>Location</label><input type="text" id="resume-summary-location"></div>
+            <div class="field"><label>Phone</label><input type="text" id="resume-summary-phone"></div>
+            <div class="field"><label>Email</label><input type="text" id="resume-summary-email"></div>
           </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Location</label><input type="text" id="resume-summary-location" class="cms-input"></div>
-            <div class="cms-form-group"><label>Phone</label><input type="text" id="resume-summary-phone" class="cms-input"></div>
-            <div class="cms-form-group"><label>Email</label><input type="text" id="resume-summary-email" class="cms-input"></div>
-          </div>
-          
-          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Education</h3>
-          <div id="resume-education-list" class="cms-list-container"></div>
-          <button id="add-education" class="cms-btn cms-btn-secondary">➕ Add Education</button>
-          
-          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Notable Projects</h3>
-          <div id="resume-projects-list" class="cms-list-container"></div>
-          <button id="add-notable-project" class="cms-btn cms-btn-secondary">➕ Add Notable Project</button>
-          
-          <h3 style="margin: 30px 0 10px; font-size: 14px; color: var(--text-muted)">Experience</h3>
-          <div id="resume-experience-list" class="cms-list-container"></div>
-          <button id="add-experience" class="cms-btn cms-btn-secondary">➕ Add Experience</button>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Education</span></div>
+          <div id="resume-education-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-education">+ Add Entry</button>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Notable Projects</span></div>
+          <div id="resume-projects-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-notable-project">+ Add Project</button>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Experience</span></div>
+          <div id="resume-experience-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-experience">+ Add Role</button>
         </div>
       </div>
-      
-      <!-- Portfolio -->
-      <div class="cms-tab-content" data-tab="portfolio">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Portfolio Filters</h2></div>
-          <div id="portfolio-filters-list" class="cms-list-container"></div>
-          <button id="add-portfolio-filter" class="cms-btn cms-btn-secondary">➕ Add Filter</button>
+
+      <!-- ══════════════════════════════════════════
+           PORTFOLIO TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="portfolio">
+        <div class="section-head">
+          <h2>Portfolio</h2>
+          <p>Manage project cards and filter categories. Drag to reorder.</p>
         </div>
-        
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Portfolio Items</h2></div>
-          <div id="portfolio-items-list" class="cms-list-container"></div>
-          <button id="add-portfolio-item" class="cms-btn cms-btn-secondary">➕ Add Item</button>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Filter Categories</span></div>
+          <div id="portfolio-filters-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-portfolio-filter">+ Add Filter</button>
         </div>
-      </div>
-      
-      <!-- Services -->
-      <div class="cms-tab-content" data-tab="services">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Services</h2></div>
-          <div id="services-list" class="cms-list-container"></div>
-          <button id="add-service" class="cms-btn cms-btn-secondary">➕ Add Service</button>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Projects</span></div>
+          <div id="portfolio-items-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-portfolio-item">+ Add Project</button>
         </div>
       </div>
-      
-      <!-- Testimonials -->
-      <div class="cms-tab-content" data-tab="testimonials">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Testimonials</h2></div>
-          <div id="testimonials-list" class="cms-list-container"></div>
-          <button id="add-testimonial" class="cms-btn cms-btn-secondary">➕ Add Testimonial</button>
+
+      <!-- ══════════════════════════════════════════
+           SERVICES TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="services">
+        <div class="section-head">
+          <h2>Services</h2>
+          <p>The service cards shown on the portfolio.</p>
+        </div>
+        <div class="card">
+          <div id="services-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-service">+ Add Service</button>
         </div>
       </div>
-      
-      <!-- Contact -->
-      <div class="cms-tab-content" data-tab="contact">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Contact</h2></div>
-          <div class="cms-form-group">
-            <label>Section Subtitle</label>
-            <input type="text" id="contact-subtitle" class="cms-input">
+
+      <!-- ══════════════════════════════════════════
+           TESTIMONIALS TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="testimonials">
+        <div class="section-head">
+          <h2>Testimonials</h2>
+          <p>Client quotes shown in the swiper carousel.</p>
+        </div>
+        <div class="card">
+          <div id="testimonials-list" class="list-wrap"></div>
+          <button class="btn btn-ghost btn-sm" id="add-testimonial">+ Add Testimonial</button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           CONTACT TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="contact">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p>Your contact info and the form action endpoint.</p>
+        </div>
+        <div class="card">
+          <div class="field"><label>Section Subtitle</label><input type="text" id="contact-subtitle"></div>
+          <div class="row">
+            <div class="field"><label>Location</label><input type="text" id="contact-location"></div>
+            <div class="field"><label>Phone</label><input type="text" id="contact-phone"></div>
           </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Location</label><input type="text" id="contact-location" class="cms-input"></div>
-            <div class="cms-form-group"><label>Phone</label><input type="text" id="contact-phone" class="cms-input"></div>
+          <div class="row">
+            <div class="field"><label>Email</label><input type="text" id="contact-email"></div>
+            <div class="field"><label>GitHub URL</label><input type="text" id="contact-github"></div>
           </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Email</label><input type="text" id="contact-email" class="cms-input"></div>
-            <div class="cms-form-group"><label>GitHub Handle</label><input type="text" id="contact-github" class="cms-input"></div>
+          <div class="field"><label>Form Action URL</label><input type="text" id="contact-form-action" placeholder="forms/contact.php"></div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           FOOTER TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="footer">
+        <div class="section-head">
+          <h2>Footer</h2>
+          <p>Copyright text and credits shown at the bottom of the site.</p>
+        </div>
+        <div class="card">
+          <div class="row">
+            <div class="field"><label>Copyright Name</label><input type="text" id="footer-copyright"></div>
+            <div class="field"><label>Credits Text</label><input type="text" id="footer-credits"></div>
           </div>
-          <div class="cms-form-group">
-            <label>Form Action URL (e.g. Formspree)</label>
-            <input type="text" id="contact-form-action" class="cms-input">
+          <div class="row">
+            <div class="field"><label>GitHub URL</label><input type="text" id="footer-github-url"></div>
+            <div class="field"><label>GitHub Label</label><input type="text" id="footer-github-label"></div>
           </div>
         </div>
       </div>
-      
-      <!-- Footer -->
-      <div class="cms-tab-content" data-tab="footer">
-        <div class="cms-card">
-          <div class="cms-card-header"><h2 class="cms-card-title">Footer</h2></div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>Copyright</label><input type="text" id="footer-copyright" class="cms-input"></div>
-            <div class="cms-form-group"><label>Credits HTML</label><input type="text" id="footer-credits" class="cms-input"></div>
+
+      <!-- ══════════════════════════════════════════
+           SETTINGS TAB
+      ══════════════════════════════════════════ -->
+      <div class="section" data-tab="settings">
+        <div class="section-head">
+          <h2>Settings</h2>
+          <p>Configure your admin dashboard preferences.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><span class="card-title">🔐 Change Password</span></div>
+          <div class="row">
+            <div class="field">
+              <label>New Password</label>
+              <input type="password" id="settings-new-password" placeholder="Enter new password">
+            </div>
+            <div class="field">
+              <label>Confirm Password</label>
+              <input type="password" id="settings-confirm-password" placeholder="Confirm new password">
+            </div>
           </div>
-          <div class="cms-form-row">
-            <div class="cms-form-group"><label>GitHub URL</label><input type="text" id="footer-github-url" class="cms-input"></div>
-            <div class="cms-form-group"><label>GitHub Label</label><input type="text" id="footer-github-label" class="cms-input"></div>
+          <button class="btn btn-primary btn-sm" id="settings-save-password">Update Password</button>
+          <div class="settings-msg" id="settings-pwd-msg"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><span class="card-title">🎨 Accent Color</span></div>
+          <p style="font-size:13px;color:var(--muted-2);margin-bottom:16px">Customize the dashboard accent color.</p>
+          <div class="color-swatches" id="color-swatches">
+            <button class="swatch active" data-color="#0ea5e9" style="background:#0ea5e9" title="Sky Blue"></button>
+            <button class="swatch" data-color="#6366f1" style="background:#6366f1" title="Indigo"></button>
+            <button class="swatch" data-color="#10b981" style="background:#10b981" title="Emerald"></button>
+            <button class="swatch" data-color="#f59e0b" style="background:#f59e0b" title="Amber"></button>
+            <button class="swatch" data-color="#ef4444" style="background:#ef4444" title="Red"></button>
+            <button class="swatch" data-color="#8b5cf6" style="background:#8b5cf6" title="Purple"></button>
+            <button class="swatch" data-color="#ec4899" style="background:#ec4899" title="Pink"></button>
+            <button class="swatch" data-color="#14b8a6" style="background:#14b8a6" title="Teal"></button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:14px">
+            <label style="font-size:12px;color:var(--muted-2)">Custom:</label>
+            <input type="color" id="custom-accent" value="#0ea5e9" style="height:34px;width:60px;border:1px solid var(--border);border-radius:8px;background:transparent;cursor:pointer">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><span class="card-title">💾 Auto-Save</span></div>
+          <div class="settings-toggle-row">
+            <div>
+              <div style="font-size:14px;font-weight:500;color:var(--text)">Auto-save to browser storage</div>
+              <div style="font-size:12px;color:var(--muted-2);margin-top:3px">Automatically save changes to localStorage as you type</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="settings-autosave" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><span class="card-title">📦 Data Management</span></div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-primary btn-sm" id="btn-save-settings">💾 Save & Download data.json</button>
+            <button class="btn btn-ghost btn-sm" id="btn-load-settings">📂 Load data.json</button>
+            <button class="btn btn-danger btn-sm" id="btn-clear-cache">🗑 Clear localStorage Cache</button>
+          </div>
+          <div class="settings-msg" id="settings-data-msg" style="margin-top:12px"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><span class="card-title">⌨️ Keyboard Shortcuts</span></div>
+          <div class="shortcuts-list">
+            <div class="shortcut-row"><kbd>Ctrl + S</kbd><span>Save & Download data.json</span></div>
+            <div class="shortcut-row"><kbd>Ctrl + K</kbd><span>Open section search</span></div>
+            <div class="shortcut-row"><kbd>Escape</kbd><span>Close search / notifications</span></div>
           </div>
         </div>
       </div>
-      
-    </div>
-  </main>
-  
+
+    </div><!-- /content-area -->
+  </div><!-- /main-area -->
+
   <!-- Toast -->
-  <div class="cms-toast" id="cms-toast"></div>
-  
-  <!-- Hidden file input for data.json loading -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Hidden inputs -->
   <input type="file" id="file-loader" accept=".json" style="display:none">
-  
+
   <script src="config.js"></script>
   <script src="cms.js"></script>
 </body>
