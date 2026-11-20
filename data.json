@@ -71,6 +71,15 @@
       { "icon": "bi-cloud-upload", "label": "cPanel Deploy" },
       { "icon": "bi-phone", "label": "React" },
       { "icon": "bi-shield-check", "label": "REST APIs" }
+    ],
+    "cybersecurityTitle": "Cybersecurity Tools & Technologies",
+    "cybersecurityBadges": [
+      { "icon": "bi-terminal", "label": "Kali Linux" },
+      { "icon": "bi-terminal-fill", "label": "Linux Terminal" },
+      { "icon": "bi-radar", "label": "Nmap" },
+      { "icon": "bi-key", "label": "John the Ripper" },
+      { "icon": "bi-box", "label": "Docker" },
+      { "icon": "bi-search", "label": "Autopsy" }
     ]
   },
   "resume": {
@@ -83,6 +92,18 @@
       "email": "kalibest10@gmail.com"
     },
     "education": [
+      {
+        "degree": "Master's in Data Science",
+        "year": "2026",
+        "institution": "Roma Business School",
+        "description": "Pursuing a Master's in Data Science at Roma Business School, gaining advanced skills in data analytics, machine learning, and data-driven decision making."
+      },
+      {
+        "degree": "Bachelor of Science (B.Sc.) in Cybersecurity",
+        "year": "2022–2025",
+        "institution": "The University of Texas at Austin, USA",
+        "description": "Studied Cybersecurity at UT Austin, covering network security, digital forensics, ethical hacking, cryptography, and risk management."
+      },
       {
         "degree": "Biochemistry and Nutrition",
         "year": "2023",

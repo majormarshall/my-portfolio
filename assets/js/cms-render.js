@@ -135,9 +135,25 @@ async function fetchAndRenderData() {
     
     const techBadges = document.getElementById('cms-tech-badges');
     if (techBadges) {
-      techBadges.innerHTML = data.skills.badges.map(badge => `
+      let badgesHtml = data.skills.badges.map(badge => `
         <span class="tech-badge"><i class="bi ${badge.icon}"></i> ${badge.label}</span>
       `).join('');
+
+      // Cybersecurity Tools & Technologies section
+      if (data.skills.cybersecurityBadges && data.skills.cybersecurityBadges.length) {
+        badgesHtml += `
+          <div class="cyber-badges-section mt-4">
+            <h6 class="cyber-badges-title"><i class="bi bi-shield-lock-fill me-2"></i>${data.skills.cybersecurityTitle || 'Cybersecurity Tools & Technologies'}</h6>
+            <div class="cyber-badges-wrap">
+              ${data.skills.cybersecurityBadges.map(badge => `
+                <span class="tech-badge cyber-badge"><i class="bi ${badge.icon}"></i> ${badge.label}</span>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      techBadges.innerHTML = badgesHtml;
     }
 
     // 7. Resume
