@@ -7,6 +7,10 @@ const CMS_CONFIG = {
   ATTEMPTS_KEY: 'cms_attempts',
   LOCKOUT_KEY: 'cms_lockout',
   DATA_KEY: 'cms_data',
-  PWD_KEY: 'cms_custom_password'
-};
+  PWD_KEY: 'cms_custom_password',
 
+  // ── Server-save secret ───────────────────────────────────────────────────
+  // Must match $SAVE_SECRET in admin/save_secret.php on your server.
+  // Change this AFTER you set save_secret.php on cPanel.
+  SAVE_SECRET: 'CHANGE_THIS_TO_A_LONG_RANDOM_SECRET_STRING'
+};

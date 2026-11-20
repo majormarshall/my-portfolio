@@ -375,28 +375,68 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─────────────────────────────────────────────────────────
   // SAVE & DOWNLOAD
   // ─────────────────────────────────────────────────────────
-  function saveAndDownload() {
+  // ── Generate daily save token (matches save.php logic) ──────────────────
+  async function getSaveToken() {
+    const secret = (typeof CMS_CONFIG !== 'undefined' && CMS_CONFIG.SAVE_SECRET) || '';
+    const today  = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const msgBuf = new TextEncoder().encode(secret + today);
+    const hashBuf = await crypto.subtle.digest('SHA-256', msgBuf);
+    return Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  // ── Trigger a local download of data.json (fallback) ─────────────────────
+  function downloadJson(data) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'data.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }
+
+  // ── Main save: push to server, fall back to download ─────────────────────
+  async function saveAndDownload() {
     const data = collectFormData();
     localStorage.setItem(CMS_CONFIG.DATA_KEY, JSON.stringify(data));
-
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    // Update last saved
-    const ovLastSaved = document.getElementById('overview-last-saved');
-    if (ovLastSaved) ovLastSaved.textContent = `Last saved: ${new Date().toLocaleString()}`;
-
-    logActivity('💾', 'Saved and downloaded data.json');
-    showToast('data.json downloaded! Upload it to your site folder.');
     cmsData = data;
     populateOverview(data);
+
+    // Disable save button while in-flight
+    if (btnSave) { btnSave.disabled = true; btnSave.textContent = 'Saving…'; }
+
+    try {
+      const token = await getSaveToken();
+      const res   = await fetch('save.php', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token, data })
+      });
+
+      const json = await res.json().catch(() => ({}));
+
+      if (res.ok && json.ok) {
+        // ✅ Server save succeeded
+        const ovLastSaved = document.getElementById('overview-last-saved');
+        if (ovLastSaved) ovLastSaved.textContent = `Last saved: ${new Date().toLocaleString()}`;
+        logActivity('💾', 'Saved directly to server — data.json updated live');
+        showToast('✅ Saved! Your live site is updated.');
+      } else {
+        // ⚠️ Server returned an error — fall back to download
+        const errMsg = json.error || `HTTP ${res.status}`;
+        console.warn('[CMS] Server save failed:', errMsg, '— falling back to download.');
+        downloadJson(data);
+        logActivity('⬇️', `Server save failed (${errMsg}) — downloaded data.json instead`);
+        showToast(`⚠️ Server error: ${errMsg}. File downloaded — upload manually.`, 'warning');
+      }
+    } catch (err) {
+      // 🌐 Network / fetch error — fall back to download
+      console.warn('[CMS] fetch error:', err, '— falling back to download.');
+      downloadJson(data);
+      logActivity('⬇️', 'Network error — downloaded data.json (upload manually)');
+      showToast('⚠️ Could not reach server. File downloaded — upload manually.', 'warning');
+    } finally {
+      if (btnSave) { btnSave.disabled = false; btnSave.textContent = 'Save & Publish'; }
+    }
   }
 
   function collectFormData() {

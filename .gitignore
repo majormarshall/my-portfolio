@@ -35,3 +35,5 @@ build/
 
 # PHP sensitive files
 forms/smtp_config.php
+admin/save_secret.php
+admin/save_log.txt
