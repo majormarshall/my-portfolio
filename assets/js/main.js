@@ -50,9 +50,15 @@
    */
   const preloader = document.querySelector('#preloader');
   if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
+    const removePreloader = () => {
+      if (!preloader.parentNode) return;
+      preloader.style.transition = 'opacity 0.3s ease';
+      preloader.style.opacity = '0';
+      setTimeout(() => preloader.remove(), 300);
+    };
+    window.addEventListener('load', removePreloader);
+    document.addEventListener('cms:rendered', removePreloader);
+    setTimeout(removePreloader, 1500);
   }
 
   /**
@@ -80,91 +86,114 @@
    * Animation on scroll function and init
    */
   function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
+    if (window.AOS) {
+      AOS.init({
+        duration: 600,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+      });
+    }
   }
   window.addEventListener('load', aosInit);
 
   /**
-   * Init typed.js
+   * Dynamic plugins initialization (runs after CMS content is rendered)
    */
-  const selectTyped = document.querySelector('.typed');
-  if (selectTyped) {
-    let typed_strings = selectTyped.getAttribute('data-typed-items');
-    typed_strings = typed_strings.split(',');
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
-    });
-  }
+  let dynamicPluginsInitialized = false;
 
-  /**
-   * Initiate Pure Counter
-   */
-  new PureCounter();
+  function initDynamicPlugins() {
+    if (dynamicPluginsInitialized) return;
+    dynamicPluginsInitialized = true;
 
-  /**
-   * Animate the skills items on reveal
-   */
-  let skillsAnimation = document.querySelectorAll('.skills-animation');
-  skillsAnimation.forEach((item) => {
-    new Waypoint({
-      element: item,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = item.querySelectorAll('.progress .progress-bar');
-        progress.forEach(el => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%';
+    // 1. Init typed.js
+    const selectTyped = document.querySelector('.typed');
+    if (selectTyped && window.Typed) {
+      let typed_strings = selectTyped.getAttribute('data-typed-items') || '';
+      if (typed_strings) {
+        new Typed('.typed', {
+          strings: typed_strings.split(','),
+          loop: true,
+          typeSpeed: 100,
+          backSpeed: 50,
+          backDelay: 2000
         });
       }
-    });
-  });
+    }
 
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+    // 2. Initiate Pure Counter
+    if (window.PureCounter) {
+      new PureCounter();
+    }
 
-  /**
-   * Init isotope layout and filters
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
-
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
+    // 3. Animate the skills items
+    let skillsAnimation = document.querySelectorAll('.skills-animation');
+    skillsAnimation.forEach((item) => {
+      let progress = item.querySelectorAll('.progress .progress-bar');
+      progress.forEach(el => {
+        const val = el.getAttribute('aria-valuenow') || '0';
+        el.style.width = val + '%';
       });
     });
 
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
+    // 4. Initiate glightbox
+    if (window.GLightbox) {
+      GLightbox({
+        selector: '.glightbox'
+      });
+    }
+
+    // 5. Init isotope layout and filters
+    document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
+      let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
+      let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
+      let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
+      let container = isotopeItem.querySelector('.isotope-container');
+      if (!container || !window.Isotope) return;
+
+      let initIsotope;
+      const setupIsotope = () => {
+        initIsotope = new Isotope(container, {
+          itemSelector: '.isotope-item',
+          layoutMode: layout,
+          filter: filter,
+          sortBy: sort
         });
-        if (typeof aosInit === 'function') {
-          aosInit();
-        }
-      }, false);
+      };
+
+      if (window.imagesLoaded) {
+        imagesLoaded(container, setupIsotope);
+      } else {
+        setupIsotope();
+      }
+
+      isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
+        filters.addEventListener('click', function() {
+          const activeFilter = isotopeItem.querySelector('.isotope-filters .filter-active');
+          if (activeFilter) activeFilter.classList.remove('filter-active');
+          this.classList.add('filter-active');
+          if (initIsotope) {
+            initIsotope.arrange({
+              filter: this.getAttribute('data-filter')
+            });
+          }
+          if (typeof aosInit === 'function') {
+            aosInit();
+          }
+        }, false);
+      });
+
     });
 
+    if (window.AOS) {
+      window.AOS.refresh();
+    }
+  }
+
+  // Hook into cms:rendered
+  document.addEventListener('cms:rendered', initDynamicPlugins);
+  window.addEventListener('load', () => {
+    setTimeout(initDynamicPlugins, 300);
   });
 
   /**

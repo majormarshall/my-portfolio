@@ -1,6 +1,6 @@
 async function fetchAndRenderData() {
   try {
-    const response = await fetch('data.json');
+    const response = await fetch('data.json?v=' + Date.now(), { cache: 'no-store' });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -98,7 +98,7 @@ async function fetchAndRenderData() {
         <div class="col-lg-3 col-md-6">
           <div class="stats-item">
             <i class="bi ${stat.icon}"></i>
-            <span data-purecounter-start="0" data-purecounter-end="${stat.end}" data-purecounter-duration="1" class="purecounter"></span>
+            <span data-purecounter-start="0" data-purecounter-end="${stat.end}" data-purecounter-duration="1" class="purecounter">${stat.end}</span>
             <p><strong>${stat.label}</strong> <span>${stat.sublabel}</span></p>
           </div>
         </div>
@@ -224,15 +224,21 @@ async function fetchAndRenderData() {
     if (portfolioItems) {
       portfolioItems.innerHTML = data.portfolio.map(item => `
         <div class="col-lg-4 col-md-6 portfolio-item isotope-item ${item.filters.join(' ')}">
-          <div class="portfolio-content h-100">
-            <img src="${item.image}" class="img-fluid" alt="${item.title}">
-            <div class="portfolio-info">
-              <h4>${item.title}</h4>
-              <p>${item.description}</p>
-              <a href="${item.image}" title="${item.title}" data-gallery="${item.gallery}" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              <a href="${item.url}" target="_blank" title="Visit Live Site" class="details-link"><i class="bi bi-link-45deg"></i></a>
+          <div class="portfolio-card">
+            <div class="portfolio-img-wrap">
+              <img src="${item.image}" class="img-fluid" alt="${item.title}" loading="lazy">
+              <div class="portfolio-info">
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
+                <div class="portfolio-links">
+                  <a href="${item.image}" title="${item.title}" data-gallery="${item.gallery}" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="${item.url}" target="_blank" rel="noopener noreferrer" title="Visit Live Site" class="details-link"><i class="bi bi-box-arrow-up-right"></i></a>
+                </div>
+              </div>
             </div>
-            <div class="portfolio-live-link">
+            <div class="portfolio-card-body">
+              <h5 class="portfolio-card-title">${item.title}</h5>
+              <p class="portfolio-card-desc">${item.description}</p>
               <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-visit-site">
                 <i class="bi bi-box-arrow-up-right"></i> Visit Live Site
               </a>
@@ -308,16 +314,16 @@ async function fetchAndRenderData() {
       `;
     }
 
-    // Dispatch event so that vendors can reinitialize
-    document.dispatchEvent(new CustomEvent('cms:rendered'));
+    // Immediately remove preloader once data is rendered
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.style.transition = 'opacity 0.25s ease';
+      preloader.style.opacity = '0';
+      setTimeout(() => preloader.remove(), 250);
+    }
 
-    // Trigger vendor specific initializations if available
-    if (window.AOS) window.AOS.refresh();
-    if (window.PureCounter) new PureCounter();
-    if (window.GLightbox) window.GLightbox({ selector: '.glightbox' });
-    if (window.__cms_reinitSwiper) window.__cms_reinitSwiper();
-    
-    // Typed.js re-init (if needed, usually main.js handles it if typed is initialized after cms:rendered)
+    // Dispatch event so that main.js initializes dynamic plugins
+    document.dispatchEvent(new CustomEvent('cms:rendered'));
 
   } catch (error) {
     console.error('Error fetching or rendering CMS data:', error);

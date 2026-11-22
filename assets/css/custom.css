@@ -424,29 +424,116 @@
   border-color: transparent;
   box-shadow: 0 6px 20px var(--accent-glow);
 }
-.portfolio .portfolio-content {
+/* ── PORTFOLIO CARD & GRID ───────────────────── */
+.isotope-container {
+  min-height: 350px;
+}
+.portfolio-card {
   border-radius: var(--card-radius);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.08);
   transition: var(--transition);
   overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
-.portfolio .portfolio-content:hover {
-  box-shadow: 0 20px 50px rgba(14,165,233,0.2);
+.portfolio-card:hover {
+  box-shadow: 0 16px 45px rgba(14,165,233,0.18);
   transform: translateY(-6px);
+  border-color: rgba(14,165,233,0.3);
 }
-.portfolio .portfolio-content img {
+.portfolio-img-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
   height: 220px;
-  object-fit: cover;
+  background: #040b14;
 }
-.portfolio .portfolio-content .portfolio-info {
-  background: linear-gradient(135deg, rgba(4,11,20,0.92), rgba(14,165,233,0.85));
-  border-radius: var(--card-radius);
+.portfolio-img-wrap img {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  display: block;
+  transition: transform 0.4s ease;
 }
-.portfolio .portfolio-content .portfolio-info h4 {
-  background: var(--accent-gradient);
-  border-radius: 8px;
+.portfolio-card:hover .portfolio-img-wrap img {
+  transform: scale(1.06);
+}
+.portfolio-img-wrap .portfolio-info {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(4,11,20,0.88), rgba(14,165,233,0.85));
+  opacity: 0;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  text-align: center;
+  z-index: 2;
+}
+.portfolio-card:hover .portfolio-img-wrap .portfolio-info {
+  opacity: 1;
+}
+.portfolio-img-wrap .portfolio-info h4 {
   font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
   font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.portfolio-img-wrap .portfolio-info p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 12px;
+}
+.portfolio-links {
+  display: flex;
+  gap: 12px;
+}
+.portfolio-links a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(4px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.portfolio-links a:hover {
+  background: #fff;
+  color: var(--accent-color);
+  transform: scale(1.1);
+}
+.portfolio-card-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: #fff;
+}
+.portfolio-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 5px;
+}
+.portfolio-card-desc {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex-grow: 1;
 }
 
 /* ── SERVICES ───────────────────────────────── */
@@ -670,17 +757,13 @@
 }
 
 /* ── PORTFOLIO LIVE LINK BUTTON ─────────────────────────── */
-.portfolio-live-link {
-  padding: 12px 16px;
-  background: #fff;
-  border-top: 1px solid rgba(14,165,233,0.12);
-  text-align: center;
-}
 .btn-visit-site {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 9px 22px;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 22px;
   background: var(--accent-gradient);
   color: #fff !important;
   border-radius: 50px;
@@ -690,6 +773,7 @@
   text-decoration: none;
   transition: var(--transition);
   box-shadow: 0 4px 16px var(--accent-glow);
+  margin-top: auto;
 }
 .btn-visit-site:hover {
   transform: translateY(-2px);
@@ -697,18 +781,6 @@
   color: #fff !important;
 }
 .btn-visit-site i { font-size: 14px; }
-
-/* Make portfolio card flex so button always sits at the bottom */
-.portfolio .portfolio-content {
-  display: flex !important;
-  flex-direction: column;
-}
-.portfolio .portfolio-content img {
-  flex-shrink: 0;
-}
-.portfolio-live-link {
-  margin-top: auto;
-}
 
 /* ── CYBERSECURITY TOOLS SECTION ────────────── */
 .cyber-badges-section {
