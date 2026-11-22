@@ -232,6 +232,11 @@ async function fetchAndRenderData() {
               <a href="${item.image}" title="${item.title}" data-gallery="${item.gallery}" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               <a href="${item.url}" target="_blank" title="Visit Live Site" class="details-link"><i class="bi bi-link-45deg"></i></a>
             </div>
+            <div class="portfolio-live-link">
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-visit-site">
+                <i class="bi bi-box-arrow-up-right"></i> Visit Live Site
+              </a>
+            </div>
           </div>
         </div>
       `).join('');

@@ -266,29 +266,7 @@
       "delay": 600
     }
   ],
-  "testimonials": [
-    {
-      "id": "t1",
-      "quote": "He built our entire school website and management system from scratch. Students, staff, and admin all have their own portals — and it all works perfectly. We are very impressed with the result.",
-      "image": "assets/img/testimonials/testimonials-1.jpg",
-      "name": "Hamizak Academy",
-      "role": "School Management System — hamizak.com.ng"
-    },
-    {
-      "id": "t2",
-      "quote": "Professional, reliable and technically very strong. He understood what we needed for our foundation website and delivered something clean, modern and easy to manage.",
-      "image": "assets/img/testimonials/testimonials-2.jpg",
-      "name": "Kudirat Oyawoye Foundation",
-      "role": "NGO Website — kaoyawoyefoundation.com"
-    },
-    {
-      "id": "t3",
-      "quote": "Our student portal is now live and pupils can access their results, timetables, and school updates online. It has transformed how we run the school administratively.",
-      "image": "assets/img/testimonials/testimonials-3.jpg",
-      "name": "School Administrator",
-      "role": "Hamizak Student Portal — hamizakma.com.ng"
-    }
-  ],
+  "testimonials": [],
   "contact": {
     "location": "Sam Etana Air Force Base, Ikeja, Lagos, Nigeria",
     "phone": "+234 705 812 4966 / +234 810 607 1514",
